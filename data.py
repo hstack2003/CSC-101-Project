@@ -1,13 +1,11 @@
 
 
 class Restaurant:
-    def __init__(self, name:str, cuisine:str, price:int, rating:float, m_type:str):
+    def __init__(self, name:str, cuisine:str, price:int, rating:float):
         self.name = name
         self.cuisine = cuisine
         self.price = price
         self.rating = rating
-        #type; potentially redundant?
-        self.m_type = m_type
 
     def __repr__(self):
         return ("Name: {}"
