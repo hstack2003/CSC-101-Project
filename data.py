@@ -14,4 +14,5 @@ class Restaurant:
                 "Rating: {}"
                 "Type: {}".format(self.name, self.cuisine,
                                   self.price, self.rating, self.m_type))
+        #this is a test
 
