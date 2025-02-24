@@ -7,9 +7,15 @@ restaurants = [Restaurant("Firestone", "Barbecue", 4, 5),
                Restaurant("McConnell's", "Dessert", 3, 4.5)]
 
 def main():
-    ...
+    for letter in "cat":
+        print(letter)
+
     #say hello with function
     #Options to sort by name or other attributes
     #If statements to discern between commands.
     #Random function
     #Add your own?
+
+print("testing git pull")
+#testing git pull
+
