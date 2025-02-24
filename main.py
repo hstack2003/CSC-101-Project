@@ -16,6 +16,4 @@ def main():
     #Random function
     #Add your own?
 
-print("testing git pull")
-#testing git pull
 
