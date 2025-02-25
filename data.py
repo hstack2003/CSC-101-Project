@@ -1,7 +1,3 @@
-# testing . . .
-#test
-#testing pull request
-
 class Restaurant:
     def __init__(self, name:str, cuisine:str, price:int, rating:float):
         self.name = name
