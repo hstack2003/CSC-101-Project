@@ -16,26 +16,36 @@ def hello():
     print("hello")
 
 
+def category_select() -> list[int]:
+    cats = input("Enter numbers of categories you wish to search by (with spaces)\n"
+                 "1 - Name\n"
+                 "2 - Cuisine\n"
+                 "3 - Price\n"
+                 "4 - Rating\n"
+                 "> ")
+    cats = cats.split()
+    return [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
+
+
+def category_search(cats:list[int]) -> None:
+    for num in cats:
+        if num in cat_numbers:
+            pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
+            user_prefs[cat_numbers[num]] = pref.lower().strip()
+
+
+
+
 def main():
     # says hello to user and brings up search options
     hello()
 
     # Category Select:
     # In a loop, asks the user for the categories that the user wants to search by.
-    cats = input("Enter numbers of categories you wish to search by (with spaces)\n"
-                     "1 - Name\n"
-                     "2 - Cuisine\n"
-                     "3 - Price\n"
-                     "4 - Rating\n"
-                     "> ")
-    cats = cats.split()
-    cats = [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
+    cats = category_select()
 
-    #category search
-    for num in cats:
-        if num in cat_numbers:
-            pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
-            user_prefs[cat_numbers[num]] = pref.lower().strip()
+    # Category Search:
+    category_search(cats)
 
     #Category compile
     if user_prefs["name"]:
