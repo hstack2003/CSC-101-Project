@@ -10,12 +10,11 @@ class Restaurant:
         self.rating = rating
 
     def __repr__(self):
-        return ("Name: {}"
-                "Cuisine: {}"
-                "Price: {}"
-                "Rating: {}"
-                "Type: {}".format(self.name, self.cuisine,
-                                  self.price, self.rating, self.m_type))
+        return ("Name: {}, "
+                "Cuisine: {}, "
+                "Price: {}, "
+                "Rating: {}, ".format(self.name, self.cuisine,
+                                  self.price, self.rating))
         #this is a test
 
 cat_list = ["name", "cuisine", "price", "rating"]

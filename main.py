@@ -1,52 +1,62 @@
-from data import Restaurant, cat_list
+from data import Restaurant
 
-restaurants = [Restaurant("Firestone", "barbecue", 4, 5),
-               Restaurant("Woodstock", "pizza", 4, 4.5),
-               Restaurant("Scout Coffee", "cafe", 3, 4.5),
-               Restaurant("Flour House", "italian", 5, 5),
-               Restaurant("McConnell's", "dessert", 3, 4.5)]
+restaurants = [Restaurant("firestone", "barbecue", 4, 5),
+               Restaurant("woodstock", "pizza", 4, 4.5),
+               Restaurant("scout coffee", "cafe", 3, 4.5),
+               Restaurant("flour house", "italian", 5, 5),
+               Restaurant("mcconnell's", "dessert", 3, 4.5)]
+                #add more restaurants here
 
-user_data = []
+cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
+user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
+user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+
 
 def hello():
     print("hello")
 
-def help_cats():
-    print("Your category options are:")
-    for cat in cat_list:
-        print(cat)
-
-def divider():
-    print("----------------------- \n")
 
 def main():
     # says hello to user and brings up search options
     hello()
 
-    while True:
-        category = input("What category do you want to search by?\n"
-                         "(If you are done, enter 'done')\n"
-                         "(If you need the list of categories, enter 'help')\n"
-                         " > ")
-        category = category.lower().strip()
-        divider()
-        if category in cat_list:
-            user_data.append(category)
-        elif category == "done" or len(user_data) == 4:
-            break
-        elif category == "help":
-            help_cats()
-        else:
-            print("Not a valid category. Enter something else!")
-            divider()
+    # Category Select:
+    # In a loop, asks the user for the categories that the user wants to search by.
+    cats = input("Enter numbers of categories you wish to search by (with spaces)\n"
+                     "1 - Name\n"
+                     "2 - Cuisine\n"
+                     "3 - Price\n"
+                     "4 - Rating\n"
+                     "> ")
+    cats = cats.split()
+    cats = [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
 
-    print("you survived!")
+    #category search
+    for num in cats:
+        if num in cat_numbers:
+            pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
+            user_prefs[cat_numbers[num]] = pref.lower().strip()
 
+    #Category compile
+    if user_prefs["name"]:
+        name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
+        user_res["name"] = name_res
+    if user_prefs["cuisine"]:
+        cuisine_res = [restaurant for restaurant in restaurants if restaurant.cuisine == user_prefs["cuisine"]]
+        user_res["cuisine"] = cuisine_res
+    if user_prefs["price"]:
+        price_res = [restaurant for restaurant in restaurants if str(restaurant.price) == user_prefs["price"]]
+        user_res["price"] = price_res
+    if user_prefs["rating"]:
+        rating_res = [restaurant for restaurant in restaurants if str(restaurant.cuisine) == user_prefs["rating"]]
+        user_res["rating"] = rating_res
+    return user_res
+
+    #score restaurants and create one dict
 
 
 if __name__ == "__main__":
-    main()
-
+    print(main())
 
 
     #Options to sort by name or other attributes
