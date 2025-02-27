@@ -11,6 +11,5 @@ class Restaurant:
                 "Price: {}, "
                 "Rating: {}, ".format(self.name, self.cuisine,
                                   self.price, self.rating))
-        #this is a test
 
-cat_list = ["name", "cuisine", "price", "rating"]
+

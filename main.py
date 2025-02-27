@@ -13,11 +13,13 @@ user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
 
 
 def hello():
-    print("hello")
+    print("Hello!\n"
+          "Welcome to Pyelp!\n"
+          "We can help you find a restaurant to eat at.\n")
 
 
 def category_select() -> list[int]:
-    cats = input("Enter numbers of categories you wish to search by (with spaces)\n"
+    cats = input("Enter numbers of categories you wish to search by (with spaces!)\n"
                  "1 - Name\n"
                  "2 - Cuisine\n"
                  "3 - Price\n"
@@ -69,10 +71,6 @@ if __name__ == "__main__":
     print(main())
 
 
-    #Options to sort by name or other attributes
-    #If statements to discern between commands.
-    #Random function
-    #Add your own?
 
 
 
