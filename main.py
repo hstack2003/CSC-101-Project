@@ -4,7 +4,20 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("woodstock", "pizza", 4, 4.5),
                Restaurant("scout coffee", "cafe", 3, 4.5),
                Restaurant("flour house", "italian", 5, 5),
-               Restaurant("mcconnell's", "dessert", 3, 4.5)]
+               Restaurant("mcconnell's", "dessert", 3, 4.5),
+               Restaurant("olive garden", "italian", 3, 3),
+               Restaurant("high street deli", "sandwiches", 3, 4),
+               Restaurant("finney's", "new american", 4, 4),
+               Restaurant("petra", "greek", 3, 4.5),
+               Restaurant("nick the greek", "greek", 3, 3),
+               Restaurant("shin's sushi", "sushi", 4, 4.5),
+               Restaurant("lincoln deli", "sandwiches", 3, 4),
+               Restaurant("sally loo's", "cafe", 4, 5),
+               Restaurant("jewel of india", "indian", 3, 3),
+               Restaurant("nick the greek", "greek", 3, 3),
+               Restaurant("nite creamery", "dessert", 4, 5),
+               Restaurant("taqueria san miguel", "mexican", 3, 4),
+               Restaurant("taqueria santa cruz", "mexican", 3, 4.5)]
                 #add more restaurants here
 
 cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
