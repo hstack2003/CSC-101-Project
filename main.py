@@ -1,5 +1,6 @@
 from data import Restaurant
 
+#restaurant data created by Hannah and Diego
 restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("woodstock", "pizza", 4, 4.5),
                Restaurant("scout coffee", "cafe", 3, 4.5),
@@ -20,17 +21,20 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("taqueria santa cruz", "mexican", 3, 4.5)]
                 #add more restaurants here
 
+# Data storage created by Hannah and Diego
 cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
 user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
 
 
+#hello function made by Diego and Hannah
 def hello():
     print("Hello!\n"
           "Welcome to Pyelp!\n"
           "We can help you find a restaurant to eat at.\n")
 
 
+#category select function made by Diego and Hannah
 def category_select() -> list[int]:
     cats = input("Enter numbers of categories you wish to search by (with spaces!)\n"
                  "1 - Name\n"
@@ -42,15 +46,34 @@ def category_select() -> list[int]:
     return [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
 
 
+#category search function made by Hannah and Diego
 def category_search(cats:list[int]) -> None:
     for num in cats:
         if num in cat_numbers:
             pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
             user_prefs[cat_numbers[num]] = pref.lower().strip()
 
+# compiles results function made by Hannah and Diego
+def compile_results(prefs:dict[str, None]) -> dict[str, list[str]]:
+    if prefs["name"]:
+        name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
+        user_res["name"] = name_res
+    if prefs["cuisine"]:
+        cuisine_res = [restaurant for restaurant in restaurants if restaurant.cuisine == user_prefs["cuisine"]]
+        user_res["cuisine"] = cuisine_res
+    if prefs["price"]:
+        price_res = [restaurant for restaurant in restaurants if str(restaurant.price) == user_prefs["price"]]
+        user_res["price"] = price_res
+    if prefs["rating"]:
+        rating_res = [restaurant for restaurant in restaurants if str(restaurant.cuisine) == user_prefs["rating"]]
+        user_res["rating"] = rating_res
+    if len(user_res["name"]) == 0 and les()
+    return user_res
 
 
 
+
+#main structure made by Hannah and Diego
 def main():
     # says hello to user and brings up search options
     hello()
@@ -63,19 +86,9 @@ def main():
     category_search(cats)
 
     #Category compile
-    if user_prefs["name"]:
-        name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
-        user_res["name"] = name_res
-    if user_prefs["cuisine"]:
-        cuisine_res = [restaurant for restaurant in restaurants if restaurant.cuisine == user_prefs["cuisine"]]
-        user_res["cuisine"] = cuisine_res
-    if user_prefs["price"]:
-        price_res = [restaurant for restaurant in restaurants if str(restaurant.price) == user_prefs["price"]]
-        user_res["price"] = price_res
-    if user_prefs["rating"]:
-        rating_res = [restaurant for restaurant in restaurants if str(restaurant.cuisine) == user_prefs["rating"]]
-        user_res["rating"] = rating_res
-    return user_res
+    results = compile_results(user_prefs)
+    return results
+
 
     #score restaurants and create one dict
 
