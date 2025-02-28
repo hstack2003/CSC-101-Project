@@ -1,4 +1,5 @@
 from data import Restaurant
+from typing import Optional
 
 #restaurant data created by Hannah and Diego
 restaurants = [Restaurant("firestone", "barbecue", 4, 5),
@@ -53,8 +54,9 @@ def category_search(cats:list[int]) -> None:
             pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
             user_prefs[cat_numbers[num]] = pref.lower().strip()
 
+
 # compiles results function made by Hannah and Diego
-def compile_results(prefs:dict[str, None]) -> dict[str, list[str]]:
+def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[str]]]:
     if prefs["name"]:
         name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
         user_res["name"] = name_res
@@ -68,11 +70,8 @@ def compile_results(prefs:dict[str, None]) -> dict[str, list[str]]:
         rating_res = [restaurant for restaurant in restaurants if str(restaurant.cuisine) == user_prefs["rating"]]
         user_res["rating"] = rating_res
     if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
-        print("No search results are available for that search query.\n"
-              "Do you want to search again?\n")
-
+        return None
     return user_res
-
 
 
 
@@ -91,6 +90,10 @@ def main():
     #Category compile
     results = compile_results(user_prefs)
     if results:
+        return results
+    if not results:
+        return "\n boo :("
+
 
 
     #score restaurants and create one dict
