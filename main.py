@@ -67,7 +67,10 @@ def compile_results(prefs:dict[str, None]) -> dict[str, list[str]]:
     if prefs["rating"]:
         rating_res = [restaurant for restaurant in restaurants if str(restaurant.cuisine) == user_prefs["rating"]]
         user_res["rating"] = rating_res
-    if len(user_res["name"]) == 0 and les()
+    if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
+        print("No search results are available for that search query.\n"
+              "Do you want to search again?\n")
+
     return user_res
 
 
@@ -87,7 +90,7 @@ def main():
 
     #Category compile
     results = compile_results(user_prefs)
-    return results
+    if results:
 
 
     #score restaurants and create one dict
