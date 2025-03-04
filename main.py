@@ -29,7 +29,10 @@ user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
 reps = {}
 
 
-#hello function made by Diego and Hannah
+# hello function made by Diego and Hannah
+# hello(): Says hello to user to start program
+# input: None
+# output: None
 def hello():
     print("Hello!\n"
           "Welcome to Pyelp!\n"
@@ -104,7 +107,7 @@ def results_to_text(final_list:list[Restaurant]) -> None:
 
 #main structure made by Hannah and Diego
 def main():
-    # says hello to user and brings up search options
+
     hello()
 
     # Category Select:
