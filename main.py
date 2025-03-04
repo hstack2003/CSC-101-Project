@@ -74,6 +74,7 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant
         return None
     return user_res
 
+# trimmed_list function made by Hannah and Diego
 def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
     results_list = []
     for cat in results:
@@ -83,8 +84,7 @@ def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
     return results_list
 
 
-
-
+# repetitions function made by Hannah and Diego
 def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
     for cat in results:
         for restaurant in results[cat]:
@@ -94,6 +94,8 @@ def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
                 reps[restaurant.name] = 1
     return reps
 
+
+#results_to_text function made by Hannah and Diego
 def results_to_text(final_list:list[Restaurant]) -> None:
     with open("pyelp.txt", 'w') as file:
         file.write("Here are our suggestions for you!\n")
@@ -114,11 +116,7 @@ def main():
 
     #Category compile
     results = compile_results(user_prefs)
-    if results:
-        #
-        print("Good job!")
     if not results:
-        # we couldn't find anything statement
         print("We couldn't find anything based on your search terms.")
         choice = input("Would you like to try again? (Y or N) \n>").lower()
         if choice == "y":
@@ -130,6 +128,7 @@ def main():
     # score restaurants and create one dict
     final = trimmed_list(results)
 
+    # identify how many times each restaurant is returned
     repetitions(results)
 
     #applies final results to text file
