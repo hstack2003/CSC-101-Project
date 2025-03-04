@@ -26,6 +26,7 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
 cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
 user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+reps = {}
 
 
 #hello function made by Diego and Hannah
@@ -56,7 +57,7 @@ def category_search(cats:list[int]) -> None:
 
 
 # compiles results function made by Hannah and Diego
-def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[str]]]:
+def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant]]]:
     if prefs["name"]:
         name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
         user_res["name"] = name_res
@@ -67,13 +68,37 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[str]]]:
         price_res = [restaurant for restaurant in restaurants if str(restaurant.price) == user_prefs["price"]]
         user_res["price"] = price_res
     if prefs["rating"]:
-        rating_res = [restaurant for restaurant in restaurants if str(restaurant.cuisine) == user_prefs["rating"]]
+        rating_res = [restaurant for restaurant in restaurants if str(restaurant.rating) == user_prefs["rating"]]
         user_res["rating"] = rating_res
     if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
         return None
     return user_res
 
+def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
+    results_list = []
+    for cat in results:
+        for restaurant in results[cat]:
+            if restaurant not in results_list:
+                results_list.append(restaurant)
+    return results_list
 
+
+
+
+def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
+    for cat in results:
+        for restaurant in results[cat]:
+            if restaurant.name in reps:
+                reps[restaurant.name] += 1
+            else:
+                reps[restaurant.name] = 1
+    return reps
+
+def results_to_text(final_list:list[Restaurant]) -> None:
+    with open("pyelp.txt", 'w') as file:
+        file.write("Here are our suggestions for you!\n")
+        for rest in final_list:
+            file.write(str(rest))
 
 #main structure made by Hannah and Diego
 def main():
@@ -90,13 +115,27 @@ def main():
     #Category compile
     results = compile_results(user_prefs)
     if results:
-        return results
+        #
+        print("Good job!")
     if not results:
-        return "\n boo :("
+        # we couldn't find anything statement
+        print("We couldn't find anything based on your search terms.")
+        choice = input("Would you like to try again? (Y or N) \n>").lower()
+        if choice == "y":
+            main()
+        else:
+            print("ok...i see how it is...\n")
+            exit()
 
+    # score restaurants and create one dict
+    final = trimmed_list(results)
 
+    repetitions(results)
 
-    #score restaurants and create one dict
+    #applies final results to text file
+    results_to_text(final)
+
+    return "Your results are stored in the Pyelp.txt file!"
 
 
 if __name__ == "__main__":
