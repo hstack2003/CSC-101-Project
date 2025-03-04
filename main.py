@@ -101,7 +101,7 @@ def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
 #results_to_text function made by Hannah and Diego
 def results_to_text(final_list:list[Restaurant]) -> None:
     with open("pyelp.txt", 'w') as file:
-        file.write("Here are our suggestions for you!\n")
+        file.write("Here are our suggestions for you!\n\n")
         for rest in final_list:
             file.write(str(rest))
 
