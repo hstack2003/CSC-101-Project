@@ -18,18 +18,23 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("jewel of india", "indian", 3, 3),
                Restaurant("nite creamery", "dessert", 4, 5),
                Restaurant("taqueria san miguel", "mexican", 3, 4),
-               Restaurant("taqueria santa cruz", "mexican", 3, 4.5)]
+               Restaurant("taqueria santa cruz", "mexican", 3, 4.5),
+               Restaurant("splash cafe", "seafood", 3, 4.5),
+               Restaurant("cool cat cafe", "burgers", 4, 4.5),
+               Restaurant("red robin", "burgers", 3, 4.5),
+               Restaurant("the krusty krab", "burgers", 5, 5),
+               Restaurant("the chum bucket", "???", 1, 0),
+               Restaurant("cj's", "barbecue", 3, 4)]
                 #add more restaurants here
 
 # Data storage created by Hannah and Diego
 cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
 user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+trimmed_res = []
 reps = {}
-one_match = []
-two_matches = []
-three_matches = []
-four_matches = []
+matches = {1:[], 2:[], 3:[], 4:[]}
+
 
 
 # hello function made by Diego and Hannah
@@ -37,8 +42,7 @@ four_matches = []
 # input: None
 # output: None
 def hello():
-    print("Hello!\n"
-          "Welcome to Pyelp!\n"
+    print("Hello, welcome to Pyelp!\n"
           "We can help you find a restaurant to eat at.\n")
 
 
@@ -47,7 +51,7 @@ def hello():
 # output is a list of integers (cats) corresponding to the categories for which they have preferences
 #category select function made by Diego and Hannah
 def category_select() -> list[int]:
-    cats = input("Enter numbers of categories you wish to search by (with spaces!)\n"
+    cats = input("Enter numbers of the categories you wish to search by (with spaces!)\n"
                  "1 - Name\n"
                  "2 - Cuisine\n"
                  "3 - Price\n"
@@ -56,16 +60,15 @@ def category_select() -> list[int]:
     cats = cats.split()
     return [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
 
-#do we want this to return user_prefs?
+
 # category search function asks the user what their preference is for each selected category
 # input is the cats list
 # no output,but adds preferences to user_prefs dictionary
 #category search function made by Hannah and Diego
 def category_search(cats:list[int]) -> None:
     for num in cats:
-        if num in cat_numbers:
-            pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
-            user_prefs[cat_numbers[num]] = pref.lower().strip()
+        pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
+        user_prefs[cat_numbers[num]] = pref.lower().strip()
 
 
 # compile results function finds Restaurants whose attributes match the preferences for each category in user_prefs
@@ -89,56 +92,68 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant
         return None
     return user_res
 
-# trimmed_list function creates a list of all restaurants that match at least one preference
+
+# trim_and_find_reps function creates a single list of resulting restaurants and identifies repetitions for later sorting
 # input is the user_res list
-# output is a list: results_list
+# No output for this function. This function only alters outside lists
 # trimmed_list function made by Hannah and Diego
-def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
-    results_list = []
+def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
     for cat in results:
         for restaurant in results[cat]:
-            if restaurant not in results_list:
-                results_list.append(restaurant)
-    return results_list
+            if restaurant not in trimmed_res:
+                trimmed_res.append(restaurant)
+                reps[restaurant.name] = 1
+            else:
+                reps[restaurant.name] += 1
 
 
 # repetitions function will figure out how many preferences each restaurant matches according to how many times it appears as a value in the user_res dictionary
 # input is user_res dictionary
 # output is reps dictionary which has restaurant names as keys and integer counts as values
 # repetitions function made by Hannah and Diego
-def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
-    for cat in results:
-        for restaurant in results[cat]:
-            if restaurant.name in reps:
-                reps[restaurant.name] += 1
-            else:
-                reps[restaurant.name] = 1
-    return reps
+#def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
+    #for cat in results:
+        #for restaurant in results[cat]:
+            #if restaurant.name in reps:
+                #reps[restaurant.name] += 1
+            #else:
+                #reps[restaurant.name] = 1
+    #return reps
+
+
+def results_sorting(results_list: list[Restaurant]) -> None:
+    for restaurant in results_list:
+        if reps[restaurant.name] == 1:
+            matches[1].append(restaurant)
+        elif reps[restaurant.name] == 2:
+            matches[2].append(restaurant)
+        elif reps[restaurant.name] == 3:
+            matches[3].append(restaurant)
+        else:
+            matches[4].append(restaurant)
 
 # results_to_text function turns the results list into a text file
 # input is results_list
 # creates a text file
 #results_to_text function made by Hannah and Diego
-def results_to_text(final_list:list[Restaurant]) -> None:
+def results_to_text(lst1:list[Restaurant], lst2:list[Restaurant], lst3:list[Restaurant], lst4:list[Restaurant]) -> None:
+    all_lists = [lst4, lst3, lst2, lst1]
+    non_empties = [lst for lst in all_lists if lst]
+    responses = ["Here are the best options!\n\n", "These are some great options too.\n\n", "These options are also worth looking at.\n\n" "Still looking? Try these!\n\n"]
     with open("pyelp.txt", 'w') as file:
+        resp_idx = 0
         file.write("Here are our suggestions for you!\n\n")
-        for rest in final_list:
-            file.write(str(rest))
+        for lst in non_empties:
+            file.write(responses[resp_idx])
+            number = 1
+            for rest in lst:
+                file.write("{}.) {}".format(number, str(rest)))
+                number += 1
+            resp_idx += 1
 
-def results_sorting(results_list: list[Restaurant]) -> None:
-    for restaurant in results_list:
-        if reps[restaurant.name] == 1:
-            one_match.append(restaurant)
-        elif reps[restaurant.name] == 2:
-            two_matches.append(restaurant)
-        elif reps[restaurant.name] == 3:
-            three_matches.append(restaurant)
-        else:
-            four_matches.append(restaurant)
 
 #main structure made by Hannah and Diego
 def main():
-
     hello()
     cats = category_select()
     category_search(cats)
@@ -151,12 +166,9 @@ def main():
         else:
             print("ok...i see how it is...\n")
             exit()
-    final = trimmed_list(results)
-    repetitions(results)
-    sorted_res = results_sorting(final)
-    #results_to_text(final)
-    print("Best matches: ",two_matches)
-    print("Good matches: ",one_match)
+    trim_and_find_reps(results)
+    results_sorting(trimmed_res)
+    results_to_text(matches[1], matches[2], matches[3], matches[4])
     return "Your results are stored in the Pyelp.txt file!"
 
 
