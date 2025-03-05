@@ -26,6 +26,10 @@ cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
 user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
 reps = {}
+one_match = []
+two_matches = []
+three_matches = []
+four_matches = []
 
 
 # hello function made by Diego and Hannah
@@ -121,11 +125,7 @@ def results_to_text(final_list:list[Restaurant]) -> None:
         for rest in final_list:
             file.write(str(rest))
 
-def results_sorting(results_list: list[Restaurant]) -> tuple[list, list, list, list]:
-    one_match = []
-    two_matches = []
-    three_matches = []
-    four_matches = []
+def results_sorting(results_list: list[Restaurant]) -> None:
     for restaurant in results_list:
         if reps[restaurant.name] == 1:
             one_match.append(restaurant)
@@ -135,9 +135,6 @@ def results_sorting(results_list: list[Restaurant]) -> tuple[list, list, list, l
             three_matches.append(restaurant)
         else:
             four_matches.append(restaurant)
-    return one_match, two_matches, three_matches, four_matches
-
-
 
 #main structure made by Hannah and Diego
 def main():
@@ -158,7 +155,8 @@ def main():
     repetitions(results)
     sorted_res = results_sorting(final)
     #results_to_text(final)
-    print(sorted_res)
+    print("Best matches: ",two_matches)
+    print("Good matches: ",one_match)
     return "Your results are stored in the Pyelp.txt file!"
 
 

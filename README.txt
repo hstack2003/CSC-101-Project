@@ -9,6 +9,8 @@ Description:
 Files:
     main.py (driver file): contains our main program, functions, and database of Restaurants
     data.py: contains Restaurant class definition and methods
+Text files:
+    pyelp.txt: contains the Restaurants that meet the user's preferences
 
 Classes:
     class Restaurant:
@@ -47,8 +49,7 @@ Dictionaries:
     reps = {}
         dictionary that will contain restaurant names as keys and integers counting the number of preferences they match (ie the number of times they appear in the values of the user_res dictionary)
 
-Text files:
-    pyelp.txt: contains the Restaurants that meet the user's preferences
+
 
 Prototypes of all functions with documentation. The documentation will include - purpose of the function, usage of all arguments to the functions, usage of return type of the function. An example is listed below for your reference:
 
