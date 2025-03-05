@@ -12,45 +12,6 @@ Files:
 Text files:
     pyelp.txt: contains the Restaurants that meet the user's preferences
 
-Classes:
-    class Restaurant:
-    def __init__(self, name:str, cuisine:str, price:int, rating:float):
-        self.name = name
-        self.cuisine = cuisine
-        self.price = price
-        self.rating = rating
-
-    def __repr__(self):
-        return ("{}\n "
-                "\tCuisine: {}\n "
-                "\tPrice: {}/5 $\n "
-                "\tRating: {} stars\n\n".format(self.name.title(), self.cuisine.title(),
-                                  self.price, self.rating))
-
-    def __eq__(self, other):
-        return (self is other or type(self) == type(other) and self.name == other.name
-                and self.cuisine == other.cuisine and self.price == other.price and self.rating == other.rating)
-
-Lists:
-    restaurants: contains all the objects of class Restaurant in our database
-    cats: the integers corresponding to the categories the user is searching for
-    results_list: list of Restaurants that meet at lease one of the user's preferences
-
-Dictionaries:
-    cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
-        dictionary that links search categories to integers so user can easily search
-
-    user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}:
-        dictionary containing the user's specific preference for each category
-
-    user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}:
-        dictionary whose values are lists of Restaurants that match user preferences in each category
-
-    reps = {}
-        dictionary that will contain restaurant names as keys and integers counting the number of preferences they match (ie the number of times they appear in the values of the user_res dictionary)
-
-
-
 Prototypes of all functions with documentation. The documentation will include - purpose of the function, usage of all arguments to the functions, usage of return type of the function. An example is listed below for your reference:
 
 # Function greets the user
