@@ -7,7 +7,7 @@ Description:
     We will then present the user with a text file of restaurants that match their preferences best.
 
 Files:
-    main.py (driver file): contains our main program and database of Restaurants
+    main.py (driver file): contains our main program, functions, and database of Restaurants
     data.py: creates class Restaurant
 
 Classes:
