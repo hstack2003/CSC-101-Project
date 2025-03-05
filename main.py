@@ -1,6 +1,6 @@
 from data import Restaurant
 from typing import Optional
-
+# do we want to take the function descriptions from README and put above the functions in this file?
 #restaurant data created by Hannah and Diego
 restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("woodstock", "pizza", 4, 4.5),
@@ -50,7 +50,7 @@ def category_select() -> list[int]:
     cats = cats.split()
     return [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
 
-
+#do we want this to return user_prefs?
 #category search function made by Hannah and Diego
 def category_search(cats:list[int]) -> None:
     for num in cats:
