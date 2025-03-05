@@ -43,6 +43,7 @@ Dictionaries:
 
     user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}:
         dictionary whose values are lists of Restaurants that match user preferences in each category
+
     reps = {}
         dictionary that will contain restaurant names as keys and integers counting the number of preferences they match (ie the number of times they appear in the values of the user_res dictionary)
 
