@@ -8,7 +8,7 @@ Description:
 
 Files:
     main.py (driver file): contains our main program, functions, and database of Restaurants
-    data.py: creates class Restaurant
+    data.py: contains Restaurant class definition and methods
 
 Classes:
     class Restaurant:

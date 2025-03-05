@@ -16,7 +16,6 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("lincoln deli", "sandwiches", 3, 4),
                Restaurant("sally loo's", "cafe", 4, 5),
                Restaurant("jewel of india", "indian", 3, 3),
-               Restaurant("nick the greek", "greek", 3, 3),
                Restaurant("nite creamery", "dessert", 4, 5),
                Restaurant("taqueria san miguel", "mexican", 3, 4),
                Restaurant("taqueria santa cruz", "mexican", 3, 4.5)]
@@ -122,6 +121,24 @@ def results_to_text(final_list:list[Restaurant]) -> None:
         for rest in final_list:
             file.write(str(rest))
 
+def results_sorting(results_list: list[Restaurant]) -> tuple[list, list, list, list]:
+    one_match = []
+    two_matches = []
+    three_matches = []
+    four_matches = []
+    for restaurant in results_list:
+        if reps[restaurant.name] == 1:
+            one_match.append(restaurant)
+        elif reps[restaurant.name] == 2:
+            two_matches.append(restaurant)
+        elif reps[restaurant.name] == 3:
+            three_matches.append(restaurant)
+        else:
+            four_matches.append(restaurant)
+    return one_match, two_matches, three_matches, four_matches
+
+
+
 #main structure made by Hannah and Diego
 def main():
 
@@ -139,7 +156,9 @@ def main():
             exit()
     final = trimmed_list(results)
     repetitions(results)
-    results_to_text(final)
+    sorted_res = results_sorting(final)
+    #results_to_text(final)
+    print(sorted_res)
     return "Your results are stored in the Pyelp.txt file!"
 
 
