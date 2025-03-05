@@ -39,6 +39,9 @@ def hello():
           "We can help you find a restaurant to eat at.\n")
 
 
+# category select function asks the user to type the integers corresponding to the categories for which they have preferences
+# input is integers from user
+# output is a list of integers (cats) corresponding to the categories for which they have preferences
 #category select function made by Diego and Hannah
 def category_select() -> list[int]:
     cats = input("Enter numbers of categories you wish to search by (with spaces!)\n"
@@ -51,6 +54,9 @@ def category_select() -> list[int]:
     return [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
 
 #do we want this to return user_prefs?
+# category search function asks the user what their preference is for each selected category
+# input is the cats list
+# no output,but adds preferences to user_prefs dictionary
 #category search function made by Hannah and Diego
 def category_search(cats:list[int]) -> None:
     for num in cats:
@@ -59,6 +65,9 @@ def category_search(cats:list[int]) -> None:
             user_prefs[cat_numbers[num]] = pref.lower().strip()
 
 
+# compile results function finds Restaurants whose attributes match the preferences for each category in user_prefs
+# input is user_prefs
+# output is none if no matches or a dictionary user_res which contains a list of restaurants that match preferences as values for each category (keys)
 # compiles results function made by Hannah and Diego
 def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant]]]:
     if prefs["name"]:
@@ -77,6 +86,9 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant
         return None
     return user_res
 
+# trimmed_list function creates a list of all restaurants that match at least one preference
+# input is the user_res list
+# output is a list: results_list
 # trimmed_list function made by Hannah and Diego
 def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
     results_list = []
@@ -87,6 +99,9 @@ def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
     return results_list
 
 
+# repetitions function will figure out how many preferences each restaurant matches according to how many times it appears as a value in the user_res dictionary
+# input is user_res dictionary
+# output is reps dictionary which has restaurant names as keys and integer counts as values
 # repetitions function made by Hannah and Diego
 def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
     for cat in results:
@@ -97,7 +112,9 @@ def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
                 reps[restaurant.name] = 1
     return reps
 
-
+# results_to_text function turns the results list into a text file
+# input is results_list
+# creates a text file
 #results_to_text function made by Hannah and Diego
 def results_to_text(final_list:list[Restaurant]) -> None:
     with open("pyelp.txt", 'w') as file:
@@ -109,15 +126,8 @@ def results_to_text(final_list:list[Restaurant]) -> None:
 def main():
 
     hello()
-
-    # Category Select:
-    # In a loop, asks the user for the categories that the user wants to search by.
     cats = category_select()
-
-    # Category Search:
     category_search(cats)
-
-    #Category compile
     results = compile_results(user_prefs)
     if not results:
         print("We couldn't find anything based on your search terms.")
@@ -127,16 +137,9 @@ def main():
         else:
             print("ok...i see how it is...\n")
             exit()
-
-    # score restaurants and create one dict
     final = trimmed_list(results)
-
-    # identify how many times each restaurant is returned
     repetitions(results)
-
-    #applies final results to text file
     results_to_text(final)
-
     return "Your results are stored in the Pyelp.txt file!"
 
 
