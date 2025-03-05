@@ -33,15 +33,11 @@ def category_search(cats:list[int]) -> None:
 # output is none if no matches or a dictionary user_res which contains a list of restaurants that match preferences as values for each category (keys)
 def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant]]]:
 
-# trimmed_list function creates a list of all restaurants that match at least one preference
+# trim_and_find_reps function creates a list of all restaurants that match at least one preference
+# also creates a dictionary that has restaurant names as keys and integer counts as values (represent number of times the restaurant appears in user_res list, ie how many preferences it matches)
 # input is the user_res list
-# output is a list: results_list
-def trimmed_list(results:dict[str, list[Restaurant]]) -> list[Restaurant]:
-
-# repetitions function will figure out how many preferences each restaurant matches according to how many times it appears as a value in the user_res dictionary
-# input is user_res dictionary
-# output is reps dictionary which has restaurant names as keys and integer counts as values
-def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
+# no return but adds to trrimmed_res list and dictionary reps
+def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
 
 # results_to_text function turns the results list into a text file
 # input is results_list
