@@ -6,6 +6,9 @@ Description:
     Next, we will go through our list of restaurants to match restaurant attributes to their preferences.
     We will then present the user with a text file of restaurants that match their preferences best.
 
+Lists and Dictionaries:
+    Defined and documented in the main.py file
+
 Files:
     main.py (driver file): contains our main program, functions, and database of Restaurants
     data.py: contains Restaurant class definition and methods
@@ -42,6 +45,7 @@ def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
 # results_sorting function places all restaurants from an inputted list within a dictionary location depending on the number of times the restaurant was repeated in the search results according to the reps dict
 # input is a list of restaurant objects. Will always be the trimmed_res list
 # No output for this function. It will instead alter the global matches dictionary.
+def results_sorting(results_list:list[Restaurant]) -> None:
 
 # results_to_text function turns the results list into a text file
 # input is results_list
@@ -63,7 +67,7 @@ def main():
         else:
             print("ok...i see how it is...\n")
             exit()
-    final = trimmed_list(results)
-    repetitions(results)
-    results_to_text(final)
+    trim_and_find_reps(results)
+    results_sorting(trimmed_res)
+    results_to_text(matches[1], matches[2], matches[3], matches[4])
     return "Your results are stored in the Pyelp.txt file!"
