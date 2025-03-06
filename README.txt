@@ -36,7 +36,7 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant
 # trim_and_find_reps function creates a list of all restaurants that match at least one preference
 # also creates a dictionary that has restaurant names as keys and integer counts as values (represent number of times the restaurant appears in user_res list, ie how many preferences it matches)
 # input is the user_res list
-# no return but adds to trrimmed_res list and dictionary reps
+# no return but adds to trimmed_res list and dictionary reps
 def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
 
 # results_sorting function places all restaurants from an inputted list within a dictionary location depending on the number of times the restaurant was repeated in the search results according to the reps dict
