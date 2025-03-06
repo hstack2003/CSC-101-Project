@@ -39,6 +39,10 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant
 # no return but adds to trrimmed_res list and dictionary reps
 def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
 
+# results_sorting function places all restaurants from an inputted list within a dictionary location depending on the number of times the restaurant was repeated in the search results according to the reps dict
+# input is a list of restaurant objects. Will always be the trimmed_res list
+# No output for this function. It will instead alter the global matches dictionary.
+
 # results_to_text function turns the results list into a text file
 # input is results_list
 # creates a text file

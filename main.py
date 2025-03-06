@@ -28,11 +28,22 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                 #add more restaurants here
 
 # Data storage created by Hannah and Diego
+#cat_numbers: connects a key category number to its corresponding category
 cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
+
+#user_prefs: connects a key category string to a specified user input
 user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
+
+#user_res: connects a key category to the list of restaurants that match satisfy the query for the given category.
 user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+
+#trimmed_res: a list of all restaurants, without repeats, that matched a user input
 trimmed_res = []
+
+#reps: connects a restaurant name string to the amount of times it was repeated throughout the user_res dict
 reps = {}
+
+#matches:connects a number (representing the amount of times repeated) to a restaurant name string.
 matches = {1:[], 2:[], 3:[], 4:[]}
 
 
@@ -105,20 +116,6 @@ def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
                 reps[restaurant.name] = 1
             else:
                 reps[restaurant.name] += 1
-
-
-# repetitions function will figure out how many preferences each restaurant matches according to how many times it appears as a value in the user_res dictionary
-# input is user_res dictionary
-# output is reps dictionary which has restaurant names as keys and integer counts as values
-# repetitions function made by Hannah and Diego
-#def repetitions(results:dict[str, list[Restaurant]]) -> dict[str, int]:
-    #for cat in results:
-        #for restaurant in results[cat]:
-            #if restaurant.name in reps:
-                #reps[restaurant.name] += 1
-            #else:
-                #reps[restaurant.name] = 1
-    #return reps
 
 
 def results_sorting(results_list: list[Restaurant]) -> None:
