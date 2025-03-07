@@ -50,7 +50,7 @@ matches = {1:[], 2:[], 3:[], 4:[]}
 # category select function asks the user to type the integers corresponding to the categories for which they have preferences
 # input is integers from user
 # output is a list of integers (cats) corresponding to the categories for which they have preferences
-#category select function made by Diego and Hannah
+# category select function made by Diego and Hannah
 def category_select() -> list[int]:
     cats = input("Enter numbers of the categories you wish to search by (with spaces!)\n"
                  "1 - Name\n"
@@ -76,7 +76,7 @@ def category_search(cats:list[int]) -> None:
 # input is user_prefs
 # output is none if no matches or a dictionary user_res which contains a list of restaurants that match preferences as values for each category (keys)
 # compiles results function made by Hannah and Diego
-def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant]]]:
+def compile_results(prefs:dict[str, None]) -> None:
     if prefs["name"]:
         name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
         user_res["name"] = name_res
@@ -89,9 +89,7 @@ def compile_results(prefs:dict[str, None]) -> Optional[dict[str, list[Restaurant
     if prefs["rating"]:
         rating_res = [restaurant for restaurant in restaurants if str(restaurant.rating) == user_prefs["rating"]]
         user_res["rating"] = rating_res
-    if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
-        return None
-    return user_res
+
 
 
 # trim_and_find_reps function creates a single list of resulting restaurants and identifies repetitions for later sorting
@@ -145,8 +143,8 @@ def main():
           "We can help you find a restaurant to eat at.\n")
     cats = category_select()
     category_search(cats)
-    results = compile_results(user_prefs)
-    if not results:
+    compile_results(user_prefs)
+    if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
         print("We couldn't find anything based on your search terms.")
         choice = input("Would you like to try again? (Y or N) \n>").lower()
         if choice == "y":
@@ -154,7 +152,7 @@ def main():
         else:
             print("ok...i see how it is...\n")
             exit()
-    trim_and_find_reps(results)
+    trim_and_find_reps(user_res)
     results_sorting(trimmed_res)
     results_to_text(matches[1], matches[2], matches[3], matches[4])
     return "Your results are stored in the Pyelp.txt file!"
