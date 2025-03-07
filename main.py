@@ -47,16 +47,6 @@ reps = {}
 matches = {1:[], 2:[], 3:[], 4:[]}
 
 
-
-# hello function made by Diego and Hannah
-# hello(): Says hello to user to start program
-# input: None
-# output: None
-def hello():
-    print("Hello, welcome to Pyelp!\n"
-          "We can help you find a restaurant to eat at.\n")
-
-
 # category select function asks the user to type the integers corresponding to the categories for which they have preferences
 # input is integers from user
 # output is a list of integers (cats) corresponding to the categories for which they have preferences
@@ -151,7 +141,8 @@ def results_to_text(lst1:list[Restaurant], lst2:list[Restaurant], lst3:list[Rest
 
 #main structure made by Hannah and Diego
 def main():
-    hello()
+    print("Hello, welcome to Pyelp!\n"
+          "We can help you find a restaurant to eat at.\n")
     cats = category_select()
     category_search(cats)
     results = compile_results(user_prefs)
