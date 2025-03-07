@@ -18,6 +18,8 @@ class Testcases(unittest.TestCase):
 
     def test_compile_results_1(self):
         ex_user_prefs = {"name":None, "cuisine":"Sushi", "price":None, "rating":None}
+        ex_user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+
 
 
     def test_compile_results_2(self):
