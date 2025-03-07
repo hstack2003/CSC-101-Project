@@ -29,22 +29,22 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
 
 # Data storage created by Hannah and Diego
 #cat_numbers: connects a key category number to its corresponding category
-cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
+#cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 
 #user_prefs: connects a key category string to a specified user input
-user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
+#user_prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
 
 #user_res: connects a key category to the list of restaurants that match satisfy the query for the given category.
-user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+#user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
 
 #trimmed_res: a list of all restaurants, without repeats, that matched a user input
-trimmed_res = []
+#trimmed_res = []
 
 #reps: connects a restaurant name string to the amount of times it was repeated throughout the user_res dict
-reps = {}
+#reps = {}
 
 #matches:connects a number (representing the amount of times repeated) to a restaurant name string.
-matches = {1:[], 2:[], 3:[], 4:[]}
+#matches = {1:[], 2:[], 3:[], 4:[]}
 
 
 # category select function asks the user to type the integers corresponding to the categories for which they have preferences
@@ -66,29 +66,34 @@ def category_select() -> list[int]:
 # input is the cats list
 # no output,but adds preferences to user_prefs dictionary
 #category search function made by Hannah and Diego
-def category_search(cats:list[int]) -> None:
+def category_search(cats:list[int]) -> dict[str, Optional[str]]:
+    cat_numbers = {1: "name", 2: "cuisine", 3: "price", 4: "rating"}
+    prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
     for num in cats:
         pref = input("What are you looking for in category {}?\n> ".format(cat_numbers[num]))
-        user_prefs[cat_numbers[num]] = pref.lower().strip()
+        prefs[cat_numbers[num]] = pref.lower().strip()
+    return prefs
 
 
 # compile results function finds Restaurants whose attributes match the preferences for each category in user_prefs
 # input is user_prefs
 # output is none if no matches or a dictionary user_res which contains a list of restaurants that match preferences as values for each category (keys)
 # compiles results function made by Hannah and Diego
-def compile_results(prefs:dict[str, None]) -> None:
+def compile_results(prefs:dict[str, None], data:[list[Restaurant]]) -> dict[str, list[Restaurant]]:
+    res = {"name": [], "cuisine":[], "price":[], "rating":[]}
     if prefs["name"]:
-        name_res = [restaurant for restaurant in restaurants if restaurant.name == user_prefs["name"]]
-        user_res["name"] = name_res
+        name_res = [restaurant for restaurant in data if restaurant.name == prefs["name"]]
+        res["name"] = name_res
     if prefs["cuisine"]:
-        cuisine_res = [restaurant for restaurant in restaurants if restaurant.cuisine == user_prefs["cuisine"]]
-        user_res["cuisine"] = cuisine_res
+        cuisine_res = [restaurant for restaurant in data if restaurant.cuisine == prefs["cuisine"]]
+        res["cuisine"] = cuisine_res
     if prefs["price"]:
-        price_res = [restaurant for restaurant in restaurants if str(restaurant.price) == user_prefs["price"]]
-        user_res["price"] = price_res
+        price_res = [restaurant for restaurant in data if str(restaurant.price) == prefs["price"]]
+        res["price"] = price_res
     if prefs["rating"]:
-        rating_res = [restaurant for restaurant in restaurants if str(restaurant.rating) == user_prefs["rating"]]
-        user_res["rating"] = rating_res
+        rating_res = [restaurant for restaurant in data if str(restaurant.rating) == prefs["rating"]]
+        res["rating"] = rating_res
+    return res
 
 
 
@@ -96,17 +101,21 @@ def compile_results(prefs:dict[str, None]) -> None:
 # input is the user_res list
 # No output for this function. This function only alters outside lists
 # trimmed_list function made by Hannah and Diego
-def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> None:
+def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> tuple[list[Restaurant], dict[str, int]]:
+    trimmed = []
+    name_reps = {}
     for cat in results:
         for restaurant in results[cat]:
-            if restaurant not in trimmed_res:
-                trimmed_res.append(restaurant)
-                reps[restaurant.name] = 1
+            if restaurant not in trimmed:
+                trimmed.append(restaurant)
+                name_reps[restaurant.name] = 1
             else:
-                reps[restaurant.name] += 1
+                name_reps[restaurant.name] += 1
+    return trimmed, name_reps
 
 
-def results_sorting(results_list: list[Restaurant]) -> None:
+def results_sorting(results_list: list[Restaurant], reps:dict[str, int]) -> dict[int, list[Restaurant]]:
+    matches = {1:[], 2:[], 3:[], 4:[]}
     for restaurant in results_list:
         if reps[restaurant.name] == 1:
             matches[1].append(restaurant)
@@ -116,6 +125,7 @@ def results_sorting(results_list: list[Restaurant]) -> None:
             matches[3].append(restaurant)
         else:
             matches[4].append(restaurant)
+    return matches
 
 # results_to_text function turns the results list into a text file
 # input is results_list
@@ -142,8 +152,8 @@ def main():
     print("Hello, welcome to Pyelp!\n"
           "We can help you find a restaurant to eat at.\n")
     cats = category_select()
-    category_search(cats)
-    compile_results(user_prefs)
+    user_prefs = category_search(cats)
+    user_res = compile_results(user_prefs, restaurants)
     if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
         print("We couldn't find anything based on your search terms.")
         choice = input("Would you like to try again? (Y or N) \n>").lower()
@@ -152,8 +162,8 @@ def main():
         else:
             print("ok...i see how it is...\n")
             exit()
-    trim_and_find_reps(user_res)
-    results_sorting(trimmed_res)
+    trimmed_res, reps = trim_and_find_reps(user_res)
+    matches = results_sorting(trimmed_res, reps)
     results_to_text(matches[1], matches[2], matches[3], matches[4])
     return "Your results are stored in the Pyelp.txt file!"
 

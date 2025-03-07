@@ -1,5 +1,5 @@
 from data import Restaurant
-import main
+from main import compile_results, trim_and_find_reps, results_sorting, results_to_text, restaurants
 import unittest
 
 class Testcases(unittest.TestCase):
@@ -17,8 +17,12 @@ class Testcases(unittest.TestCase):
 
 
     def test_compile_results_1(self):
-        ex_user_prefs = {"name":None, "cuisine":"Sushi", "price":None, "rating":None}
-        ex_user_res = {"name":[], "cuisine":[], "price":[], "rating":[]}
+        user_prefs = {"name":None, "cuisine":"sushi", "price":None, "rating":None}
+        expected = {"name":[], "cuisine":[Restaurant("shin's sushi", "sushi", 4, 4.5)],
+                    "price":[], "rating":[]}
+        results = compile_results(user_prefs, restaurants)
+        self.assertEqual(expected, results)
+
 
 
 
