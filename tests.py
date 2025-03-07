@@ -23,7 +23,6 @@ class Testcases(unittest.TestCase):
 
 
     def test_compile_results_2(self):
-        ...
 
 
     def test_trim_and_find_reps_1(self):
