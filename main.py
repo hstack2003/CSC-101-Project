@@ -131,11 +131,11 @@ def results_sorting(results_list: list[Restaurant], reps:dict[str, int]) -> dict
 # input is results_list
 # creates a text file
 #results_to_text function made by Hannah and Diego
-def results_to_text(lst1:list[Restaurant], lst2:list[Restaurant], lst3:list[Restaurant], lst4:list[Restaurant]) -> None:
+def results_to_text(lst1:list[Restaurant], lst2:list[Restaurant], lst3:list[Restaurant], lst4:list[Restaurant], file_name:str) -> None:
     all_lists = [lst4, lst3, lst2, lst1]
     non_empties = [lst for lst in all_lists if lst]
     responses = ["Here are the best options!\n\n", "These are some great options too.\n\n", "These options are also worth looking at.\n\n", "Still looking? Try these!\n\n"]
-    with open("pyelp.txt", 'w') as file:
+    with open(file_name, 'w') as file:
         resp_idx = 0
         file.write("Here are our suggestions for you!\n\n")
         for lst in non_empties:
@@ -164,7 +164,7 @@ def main():
             exit()
     trimmed_res, reps = trim_and_find_reps(user_res)
     matches = results_sorting(trimmed_res, reps)
-    results_to_text(matches[1], matches[2], matches[3], matches[4])
+    results_to_text(matches[1], matches[2], matches[3], matches[4], "pyelp.txt")
     return "Your results are stored in the Pyelp.txt file!"
 
 
