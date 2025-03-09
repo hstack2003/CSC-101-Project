@@ -6,9 +6,9 @@ class Restaurant:
         self.rating = rating
 
     def __repr__(self):
-        return ("{}:\n "
-                "\t\tCuisine: {}\n "
-                "\t\tPrice: {}/5 $\n "
+        return ("{}:\n"
+                "\t\tCuisine: {}\n"
+                "\t\tPrice: {}/5 $\n"
                 "\t\tRating: {} stars\n\n".format(self.name.title(), self.cuisine.title(),
                                   self.price, self.rating))
 

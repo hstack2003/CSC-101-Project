@@ -1,0 +1,19 @@
+Here are our suggestions for you!
+
+Here are the best options!
+
+1.) Woodstock:
+		Cuisine: Pizza
+		Price: 4/5 $
+		Rating: 4.5 stars
+
+2.) Flour House:
+		Cuisine: Italian
+		Price: 5/5 $
+		Rating: 5 stars
+
+3.) The Krusty Krab:
+		Cuisine: Burgers
+		Price: 5/5 $
+		Rating: 5 stars
+
