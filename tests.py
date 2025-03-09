@@ -89,10 +89,14 @@ class Testcases(unittest.TestCase):
         self.assertEqual(expected, result)
 
 
-#Note that
-    #def test_results_to_text_1(self):
-       # matches = {1: [Restaurant("woodstock", "pizza", 4, 4.5), Restaurant("flour house", "italian", 5, 5), Restaurant("the krusty krab", "burgers", 5, 5)], 2: [], 3: [], 4: []}
-        #result = results_to_text(matches[1], matches[2], matches[3], matches[4], "test.txt")
 
+    def test_results_to_text_1(self):
+        matches = {1: [Restaurant("woodstock", "pizza", 4, 4.5), Restaurant("flour house", "italian", 5, 5),
+                       Restaurant("the krusty krab", "burgers", 5, 5)], 2: [], 3: [], 4: []}
+        main.results_to_text(matches[1], matches[2], matches[3], matches[4], "pyelp.txt")
+        with open('pyelp.txt', 'r') as file:
+            result = file.read()
+        expected = "Here are our suggestions for you!\n\nHere are the best options!\n\n1.) Woodstock:\n\t\tCuisine: Pizza\n\t\tPrice: 4/5 $\n\t\tRating: 4.5 stars\n\n2.) Flour House:\n\t\tCuisine: Italian\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n3.) The Krusty Krab:\n\t\tCuisine: Burgers\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n"
+        self.assertEqual(result, expected)
 
     #def test_results_to_text_2(self):
