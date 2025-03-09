@@ -139,12 +139,12 @@ def results_sorting(results_list: list[Restaurant], reps:dict[str, int]) -> dict
 # results_to_text function made by Hannah and Diego
 def results_to_text(lst1:list[Restaurant], lst2:list[Restaurant], lst3:list[Restaurant], lst4:list[Restaurant], file_name:str) -> None:
     all_lists = [lst4, lst3, lst2, lst1]
-    non_empties = [lst for lst in all_lists if lst]
+    final_lists = [lst for lst in all_lists if lst]
     responses = ["Here are the best options!\n\n", "These are some great options too.\n\n", "These options are also worth looking at.\n\n", "Still looking? Try these!\n\n"]
     with open(file_name, 'w') as file:
         resp_idx = 0
         file.write("Here are our suggestions for you!\n\n")
-        for lst in non_empties:
+        for lst in final_lists:
             file.write(responses[resp_idx])
             list_number = 1
             for rest in lst:
@@ -162,7 +162,7 @@ def main():
     user_res = compile_results(user_prefs, restaurants)
     if len(user_res["name"]) == 0 and len(user_res["cuisine"]) == 0 and len(user_res["price"]) == 0 and len(user_res["rating"]) == 0:
         print("We couldn't find anything based on your search terms.")
-        choice = input("Would you like to try again? (Y or N) \n>").lower()
+        choice = input("Would you like to try again? (Y or N) \n>").lower().strip()
         if choice == "y":
             main()
         else:
