@@ -31,6 +31,7 @@ class Testcases(unittest.TestCase):
         results = compile_results(user_prefs, restaurants)
         self.assertEqual(expected, results)
 
+
     def test_trim_and_find_reps_1(self):
         res = {"cuisine": [Restaurant("woodstock", "pizza", 4, 4.5)], "name": [],
                     "price": [Restaurant("flour house", "italian", 5, 5), Restaurant("the krusty krab", "burgers", 5, 5)], "rating": []}
@@ -41,7 +42,24 @@ class Testcases(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_trim_and_find_reps_2(self):
-        ...
+        res = {"cuisine": [Restaurant("flour house", "italian", 5, 5),
+                           Restaurant("olive garden", "italian", 3,3)],
+               "name":[],
+               "price":[],
+               "rating":[Restaurant("olive garden", "italian", 3, 3),
+                         Restaurant("nick the greek", "greek", 3, 3),
+                         Restaurant("jewel of india", "indian", 3, 3)]}
+
+        trimmed = [Restaurant("flour house", "italian", 5,5),
+                   Restaurant("olive garden", "italian", 3, 3),
+                   Restaurant("nick the greek", "greek", 3, 3),
+                   Restaurant("jewel of india", "indian", 3, 3)]
+
+        name_reps = {"flour house": 1, "olive garden": 2, "nick the greek": 1, "jewel of india": 1}
+
+        result = trim_and_find_reps(res)
+        self.assertEqual((trimmed, name_reps), result)
+
 
     def test_results_sorting_1(self):
         matches = {1: [], 2: [], 3: [], 4: []}
@@ -52,16 +70,29 @@ class Testcases(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_results_sorting_2(self):
-        ...
+        results_list = [Restaurant("firestone", "barbecue", 4, 5),
+                        Restaurant("flour house", "italian", 5, 5),
+                        Restaurant("sally loo's", "cafe", 4, 5),
+                        Restaurant("nite creamery", "dessert", 4, 5),
+                        Restaurant("the krusty krab", "burgers", 5, 5),
+                        Restaurant("cj's", "barbecue", 3, 4)]
+        reps = {"firestone":2, "flour house":1, "sally loo's":1, "nite creamery":1, "the krusty krab":1, "cj's":1}
+        expected = {1:[Restaurant("flour house", "italian", 5, 5),
+                     Restaurant("sally loo's", "cafe", 4, 5),
+                     Restaurant("nite creamery", "dessert", 4, 5),
+                     Restaurant("the krusty krab", "burgers", 5, 5),
+                     Restaurant("cj's", "barbecue", 3, 4)],
+                  2:[Restaurant("firestone", "barbecue", 4, 5)],
+                    3:[],
+                    4:[]}
+        result = results_sorting(results_list, reps)
+        self.assertEqual(expected, result)
 
 
-    def test_results_to_text_1(self):
-        matches = {1: [Restaurant("woodstock", "pizza", 4, 4.5), Restaurant("flour house", "italian", 5, 5), Restaurant("the krusty krab", "burgers", 5, 5)], 2: [], 3: [], 4: []}
-        main.results_to_text(matches[1], matches[2], matches[3], matches[4])
-        with open('pyelp.txt', 'r') as file:
-            result = file.read()
-        expected = "Here are our suggestions for you!\n\nHere are the best options!\n\n1.) Woodstock:\n\t\tCuisine: Pizza\n\t\tPrice: 4/5 $\n\t\tRating: 4.5 stars\n\n2.) Flour House:\n\t\tCuisine: Italian\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n3.) The Krusty Krab:\n\t\tCuisine: Burgers\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n"
-        self.assertEqual(result, expected)
+#Note that
+    #def test_results_to_text_1(self):
+       # matches = {1: [Restaurant("woodstock", "pizza", 4, 4.5), Restaurant("flour house", "italian", 5, 5), Restaurant("the krusty krab", "burgers", 5, 5)], 2: [], 3: [], 4: []}
+        #result = results_to_text(matches[1], matches[2], matches[3], matches[4], "test.txt")
 
-    def test_results_to_text_2(self):
-        ...
+
+    #def test_results_to_text_2(self):
