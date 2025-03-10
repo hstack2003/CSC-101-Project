@@ -23,7 +23,7 @@ Files:
 Text files:
     pyelp.txt: contains the Restaurants that meet the user's preferences
 
-Prototypes of all functions with documentation. The documentation will include - purpose of the function, usage of all arguments to the functions, usage of return type of the function. An example is listed below for your reference:
+Prototypes of all functions with documentation:
 
 # category select function asks the user to type the integers corresponding to the categories for which they have preferences
 # input is integers from user

@@ -26,8 +26,7 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("the chum bucket", "???", 1, 0),
                Restaurant("cj's", "barbecue", 3, 4)]
 
-
-# Data storage created by Hannah and Diego
+#Data storage (dictionaries and lists used in functions below) created by Diego and Hannah
 #cat_numbers: connects a key category number to its corresponding category
 #cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 
@@ -46,11 +45,10 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
 #matches:connects a number (representing the amount of times repeated) to a restaurant name string.
 #matches = {1:[], 2:[], 3:[], 4:[]}
 
-
+# category select function made by Diego and Hannah:
 # category select function asks the user to type the integers corresponding to the categories for which they have preferences
 # input is integers from user
 # output is a list of integers (cats) corresponding to the categories for which they have preferences
-# category select function made by Diego and Hannah
 def category_select() -> list[int]:
     cats = input("Enter numbers of the categories you wish to search by (with spaces!)\n"
                  "1 - Name\n"
@@ -61,11 +59,10 @@ def category_select() -> list[int]:
     cats = cats.split()
     return [int(num) for num in cats if num.isdigit() and 1 <= int(num) <= 4]
 
-
+# category search function made by Hannah and Diego:
 # category search function asks the user what their preference is for each selected category
-# input is the cat_numbers list
-# output is a dictionary of category strings and optional response strings
-# category search function made by Hannah and Diego
+# input is the cat_numbers which connects a key category number to its corresponding category
+# output is a dictionary prefs of category strings and optional response strings
 def category_search(cats:list[int]) -> dict[str, Optional[str]]:
     cat_numbers = {1: "name", 2: "cuisine", 3: "price", 4: "rating"}
     prefs = {"name":None, "cuisine":None, "price":None, "rating":None}
@@ -74,11 +71,10 @@ def category_search(cats:list[int]) -> dict[str, Optional[str]]:
         prefs[cat_numbers[num]] = pref.lower().strip()
     return prefs
 
-
+# compiles results function made by Hannah and Diego:
 # compile results function finds Restaurants whose attributes match the preferences for each category in user_prefs
-# input is user_prefs dictionary
-# output is a dictionary user_res which contains a list of restaurants that match preferences as values for each category (keys)
-# compiles results function made by Hannah and Diego
+# input is prefs dictionary
+# output is a dictionary, res, which contains a list of restaurants that match preferences as values for each category (keys)
 def compile_results(prefs:dict[str, None], data:[list[Restaurant]]) -> dict[str, list[Restaurant]]:
     res = {"name": [], "cuisine":[], "price":[], "rating":[]}
     if prefs["name"]:
@@ -96,12 +92,11 @@ def compile_results(prefs:dict[str, None], data:[list[Restaurant]]) -> dict[str,
     return res
 
 
-
+# trimmed_list function made by Hannah and Diego:
 # trim_and_find_reps function creates a single list of resulting restaurants and identifies repetitions for later sorting
-# input is the user_res list
+# input is the res dictionary
 # output is a tuple containing the results list of restaurant objects
-# and a dictionary of restaurant name strings and integers
-# trimmed_list function made by Hannah and Diego
+# and a dictionary of restaurant name strings and integers, called name_reps
 def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> tuple[list[Restaurant], dict[str, int]]:
     trimmed = []
     name_reps = {}
@@ -114,12 +109,12 @@ def trim_and_find_reps(results:dict[str, list[Restaurant]]) -> tuple[list[Restau
                 name_reps[restaurant.name] += 1
     return trimmed, name_reps
 
+# results_sorting function made by Hannah and Diego:
 # results_sorting function places all restaurants from an inputted list within
-# a dictionary location depending on the number of times the restaurant was
+# a dictionary, called matches, depending on the number of times the restaurant was
 # repeated in the search results according to the reps dict
 # input is a list of restaurant objects. Will always be the trimmed_res list
 # Output is a dictionary of integers and lists of restaurants objects
-# results_sorting function made by Hannah and Diego
 def results_sorting(results_list: list[Restaurant], reps:dict[str, int]) -> dict[int, list[Restaurant]]:
     matches = {1:[], 2:[], 3:[], 4:[]}
     for restaurant in results_list:
@@ -133,10 +128,10 @@ def results_sorting(results_list: list[Restaurant], reps:dict[str, int]) -> dict
             matches[4].append(restaurant)
     return matches
 
+# results_to_text function made by Hannah and Diego:
 # results_to_text function turns the results list into a text file
 # input is results_list
 # creates or overwrites the "pyelp.txt" text file
-# results_to_text function made by Hannah and Diego
 def results_to_text(lst1:list[Restaurant], lst2:list[Restaurant], lst3:list[Restaurant], lst4:list[Restaurant], file_name:str) -> None:
     all_lists = [lst4, lst3, lst2, lst1]
     final_lists = [lst for lst in all_lists if lst]
