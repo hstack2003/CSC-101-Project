@@ -26,7 +26,7 @@ restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("the chum bucket", "???", 1, 0),
                Restaurant("cj's", "barbecue", 3, 4)]
 
-#Data storage (dictionaries and lists used in functions below) created by Diego and Hannah
+#Data storage (dictionaries and lists used in functions below) created by Diego and Hannah:
 #cat_numbers: connects a key category number to its corresponding category
 #cat_numbers = {1:"name", 2:"cuisine", 3:"price", 4:"rating"}
 
