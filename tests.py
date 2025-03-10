@@ -1,3 +1,4 @@
+#file written by Diego and Hannah
 import main
 from data import Restaurant
 from main import compile_results, trim_and_find_reps, results_sorting, results_to_text, restaurants
@@ -26,6 +27,7 @@ class Testcases(unittest.TestCase):
         results = compile_results(user_prefs, restaurants)
         self.assertEqual(expected, results)
 
+    #written by Hannah
     def test_compile_results_2(self):
         user_prefs = {"name": None, "cuisine": "pizza", "price": '5', "rating": None}
         expected = {"cuisine": [Restaurant("woodstock", "pizza", 4, 4.5)], "name": [],
@@ -33,7 +35,7 @@ class Testcases(unittest.TestCase):
         results = compile_results(user_prefs, restaurants)
         self.assertEqual(expected, results)
 
-
+    #written by Hannah
     def test_trim_and_find_reps_1(self):
         res = {"cuisine": [Restaurant("woodstock", "pizza", 4, 4.5)], "name": [],
                     "price": [Restaurant("flour house", "italian", 5, 5), Restaurant("the krusty krab", "burgers", 5, 5)], "rating": []}
@@ -63,7 +65,7 @@ class Testcases(unittest.TestCase):
         result = trim_and_find_reps(res)
         self.assertEqual((trimmed, name_reps), result)
 
-
+    #written by Hannah
     def test_results_sorting_1(self):
         matches = {1: [], 2: [], 3: [], 4: []}
         results_list = [Restaurant("woodstock", "pizza", 4, 4.5), Restaurant("flour house", "italian", 5, 5), Restaurant("the krusty krab", "burgers", 5, 5)]
@@ -94,7 +96,7 @@ class Testcases(unittest.TestCase):
         self.assertEqual(expected, result)
 
 
-
+    #written by Hannah
     def test_results_to_text_1(self):
         matches = {1: [Restaurant("woodstock", "pizza", 4, 4.5), Restaurant("flour house", "italian", 5, 5),
                        Restaurant("the krusty krab", "burgers", 5, 5)], 2: [], 3: [], 4: []}

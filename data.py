@@ -1,4 +1,4 @@
-# restaurant class and class functions made by Hannah and Diego
+# restaurant class and class functions made by Diego
 class Restaurant:
     def __init__(self, name:str, cuisine:str, price:int, rating:float):
         self.name = name

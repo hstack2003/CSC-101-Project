@@ -1,3 +1,4 @@
+#file written by Hannah
 PYELP: a program to help indecisive users decide where to eat
 Documentation drafted by Hannah and Diego and edited by Hannah
 
