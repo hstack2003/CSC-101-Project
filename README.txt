@@ -1,4 +1,5 @@
 PYELP: a program to help indecisive users decide where to eat
+Documentation drafted by Hannah and Diego and edited by Hannah
 
 Description:
     Our program will ask users what restaurant categories or attributes they care about (i.e. name, cuisine, price, and rating).
