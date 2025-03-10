@@ -1,6 +1,6 @@
 from data import Restaurant
 from typing import Optional
-# do we want to take the function descriptions from README and put above the functions in this file?
+
 #restaurant data created by Hannah and Diego
 restaurants = [Restaurant("firestone", "barbecue", 4, 5),
                Restaurant("woodstock", "pizza", 4, 4.5),
