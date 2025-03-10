@@ -5,16 +5,16 @@ import unittest
 
 class Testcases(unittest.TestCase):
 
-    # Note that category_select() function is not testable due to taking user input
+    # Note: category_select() function is not testable due to taking user input
     # Here are example inputs that showcase how the function input and output works and avoids errors:
     # input: "1234 1" ---> output: [1]
     # input: "1 2 3 4" ---> output: [1, 2, 3, 4]
 
-    # Note that category_search() function is not testable due to taking user input
-    # Here are example inputs that showcase how the function input and output works and avoids errors:
+    # Note: category_search() function is not testable due to taking user input
+    # Here is an example input that showcase how the function input and output works:
     # input question: "What are you looking for in category cuisine?"
     # input: "burgers"
-    # output appends user_prefs dictionary to {"name":None, "cuisine":"burgers, "price":None, "rating":None}
+    # output appends user_prefs dictionary to {"name":None, "cuisine":"burgers", "price":None, "rating":None}
 
 
     def test_compile_results_1(self):
@@ -99,4 +99,23 @@ class Testcases(unittest.TestCase):
         expected = "Here are our suggestions for you!\n\nHere are the best options!\n\n1.) Woodstock:\n\t\tCuisine: Pizza\n\t\tPrice: 4/5 $\n\t\tRating: 4.5 stars\n\n2.) Flour House:\n\t\tCuisine: Italian\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n3.) The Krusty Krab:\n\t\tCuisine: Burgers\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n"
         self.assertEqual(result, expected)
 
-    #def test_results_to_text_2(self):
+    def test_results_to_text_2(self):
+        matches = {1:[Restaurant("flour house", "italian", 5, 5),
+                      Restaurant("cool cat cafe", "burgers", 4, 4.5),
+                      Restaurant("red robin", "burgers", 3, 4.5)],
+                   2:[Restaurant("the krusty krab", "burgers", 5, 5)],
+                   3:[],
+                   4:[]}
+        results_to_text(matches[1], matches[2], matches[3], matches[4], "pyelp.txt")
+        expected = ("Here are our suggestions for you!\n\nHere are the best options!\n\n"
+                    "1.) The Krusty Krab:\n\t\tCuisine: Burgers\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n"
+                    "These are some great options too.\n\n"
+                    "1.) Flour House:\n\t\tCuisine: Italian\n\t\tPrice: 5/5 $\n\t\tRating: 5 stars\n\n"
+                    "2.) Cool Cat Cafe:\n\t\tCuisine: Burgers\n\t\tPrice: 4/5 $\n\t\tRating: 4.5 stars\n\n"
+                    "3.) Red Robin:\n\t\tCuisine: Burgers\n\t\tPrice: 3/5 $\n\t\tRating: 4.5 stars\n\n")
+        with open("pyelp.txt", "r") as file:
+            result = file.read()
+        self.assertEqual(expected, result)
+
+
+

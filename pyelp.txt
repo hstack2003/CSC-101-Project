@@ -2,17 +2,34 @@ Here are our suggestions for you!
 
 Here are the best options!
 
-1.) Woodstock:
-		Cuisine: Pizza
-		Price: 4/5 $
-		Rating: 4.5 stars
-
-2.) Flour House:
+1.) Flour House:
 		Cuisine: Italian
 		Price: 5/5 $
 		Rating: 5 stars
 
-3.) The Krusty Krab:
+These are some great options too.
+
+1.) Olive Garden:
+		Cuisine: Italian
+		Price: 3/5 $
+		Rating: 3 stars
+
+2.) Firestone:
+		Cuisine: Barbecue
+		Price: 4/5 $
+		Rating: 5 stars
+
+3.) Sally Loo'S:
+		Cuisine: Cafe
+		Price: 4/5 $
+		Rating: 5 stars
+
+4.) Nite Creamery:
+		Cuisine: Dessert
+		Price: 4/5 $
+		Rating: 5 stars
+
+5.) The Krusty Krab:
 		Cuisine: Burgers
 		Price: 5/5 $
 		Rating: 5 stars
